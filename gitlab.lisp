@@ -1,16 +1,13 @@
 ;;; vindarel 2017
-;;; wtf public licence
 
-(in-package :cl-user)
-(defpackage gitlab
-  (:use :cl
-        :quri
-        :dexador
-        :cl-json)
-  (:export
-   :gitlab--request
-   ))
-(in-package :gitlab)
+(in-package #:cl-user)
+(defpackage #:gitlab
+  (:use #:cl
+        #:quri
+        #:dexador
+        #:cl-json)
+  (:export #:gitlab--request))
+(in-package #:gitlab)
 
 (defparameter *gitlab--domain* ".gitlab.com")
 
@@ -27,8 +24,7 @@ params: alist of params: '((\"login\" . \"foo\")) will be url-encoded."
          (d (and data (encode-json data)))
          (url (concatenate 'string *gitlab--root-endpoint* resource p)))
     (with-input-from-string (s (dex:request url :method method :content d))
-      (decode-json s))
-    ))
+      (decode-json s))))
 
 (defun gitlab--get-access-token (&key login password)
   (let* ((url (concatenate 'string *gitlab--root-endpoint*
