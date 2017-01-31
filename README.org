@@ -1,0 +1,12 @@
+
+* Interface to Gitlab's api
+
+Working but a work in progress.
+
+: gitlab--request :GET "/projects"
+
+Login:
+
+: gitlab--get-access-token
+
+Inspired by [[https://gitlab.com/tarsius/glab][glab.el]].
