@@ -4,7 +4,6 @@
 (defpackage #:gitlab
   (:use #:cl
         #:quri
-        #:dexador
         #:cl-json)
   (:export #:gitlab--request))
 (in-package #:gitlab)
