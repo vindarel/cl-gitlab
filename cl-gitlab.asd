@@ -3,7 +3,7 @@
   (:use #:cl #:asdf))
 (in-package #:cl-gitlab-asd)
 
-(defsystem #:cl-gitlab
+(defsystem #:gitlab
   :version      "0.1.0"
   :description  "Interface to Gitlab's API"
   :author       "vindarel"
