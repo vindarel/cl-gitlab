@@ -1,18 +1,45 @@
 
-¡ don't look ! it's ugly and doesn't work.
+¡ don't look ! it's ugly.
 
 * Minimalistic interface to Gitlab's api
 
 A work in progress.
 
+** Authentication
+
+There is no need to authenticate to query public projects.
+
+Otherwise, you will need to  manually set the =*private-token*= (until
+we implement a better way).
+
+Create      a       token      on      your       Gitlab      profile:
+[[https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html][https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html]]
+and then:
+
+: (setf gitlab:access-token "secret")
+
+
+** Base function: request
+
+With =request method "path" :params  (alist) :data= you can access all
+the api.
+
 : (gitlab:request :GET "/projects")
 
-You must login beforehand or manually set the =*private-token*=:
+The other functions are only helpers.
 
-: (gitlab:get-access-token)
+** Getting a project
+
+: (gitlab:project "username/project")
+
+
+[[https://docs.gitlab.com/ce/api/projects.html#get-single-project][endpoint documentation]].
+
+
+* More
 
 Inspired by [[https://gitlab.com/tarsius/glab][glab.el]].
 
 It follows  a minimalistic  approach so you  better read  Gitlab's API
-documentation: https://docs.gitlab.com/ce/api/  The real  advantage is
+documentation: https://docs.gitlab.com/ce/api/  The goal is
 that if their API changes, our library doesn't break.

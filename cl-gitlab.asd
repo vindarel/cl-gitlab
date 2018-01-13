@@ -9,7 +9,8 @@
   :author       "vindarel"
   :serial       t
   :license      "MIT"
-  :depends-on   (#:quri
-                 #:dexador
-                 #:cl-json)
+  :depends-on   (:quri
+                 :dexador
+                 :str
+                 :cl-json)
   :components   ((:file "gitlab")))
