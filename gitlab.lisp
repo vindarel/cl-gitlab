@@ -30,13 +30,3 @@ params: alist of params: '((\"login\" . \"foo\")) will be url-encoded."
     (with-input-from-string (s (dex:request url :method method :content d))
       (decode-json s))))
 
-(defun get-access-token (&key login password)
-  (let* ((url (concatenate 'string *root-endpoint*
-                           "/session"
-                           "?" "login=" login
-                           "&" "password=" password))
-         (ret (dex:post url))
-         (json (with-input-from-string (s ret)
-                 (decode-json s)))
-         (token (cdr (assoc :PRIVATE--TOKEN json))))
-    (setq *private-token* token)))
