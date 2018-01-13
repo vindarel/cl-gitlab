@@ -7,6 +7,7 @@
   (:export
    :request
    :project
+   :project-issues
    ))
 (in-package #:gitlab)
 
@@ -30,7 +31,7 @@ Example:
 "
   (let* ((params (and *private-token*
                       (acons "private_token" *private-token* params)))
-         (p (and params (str:concat "?" (url-encode-params params))))
+         (p (and params (str:concat "?" (quri:url-encode-params params))))
          (d (and data (encode-json data)))
          (url (str:concat *root-endpoint* resource p)))
     (with-input-from-string (s (dex:request url :method method :content d))
@@ -45,3 +46,17 @@ Example:
   (request :GET
            (str:concat "/projects/" (quri:url-encode user/project))
            :params params :data data))
+
+(defun project-issues (user/project &key params)
+  "Return an alist of the project's issues, given filters of params. Needs authentication.
+
+- params: an alist which can set state, labels, milestone, search, author_id, assignee and my_reaction_emoji as described in the api doc: https://docs.gitlab.com/ce/api/issues.html#list-project-issues
+
+Example:
+
+(project-issues \"vindarel/cl-torrents\" :params '((\"state\" . \"opened\")))
+
+ "
+  (request :GET
+           (str:concat "/projects/" (quri:url-encode user/project) "/issues")
+           :params params))

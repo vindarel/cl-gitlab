@@ -18,25 +18,43 @@ and then:
 
 : (setf gitlab:access-token "secret")
 
+** Using query params
 
-** Base function: request
+   - Note taken on [2018-01-13 sam. 03:08] \\
+     room for improvement. It's flexible right now.
 
-With =request method "path" :params  (alist) :data= you can access all
-the api.
+You can  give query  parameters as  an alist to  any request  with the
+=:params= keyword argument. For example:
 
-: (gitlab:request :GET "/projects")
-
-The other functions are only helpers.
-
-** Getting a project
-
-: (gitlab:project "username/project")
+: (project-issues "user/project" :params '(("state" . "opened")))
 
 
-[[https://docs.gitlab.com/ce/api/projects.html#get-single-project][endpoint documentation]].
+** Endpoints
+
+*** Base function: request
+
+ With =request method "path" :params  (alist) :data= you can access all
+ the api.
+
+ : (gitlab:request :GET "/projects")
+
+ The other functions are only helpers.
+
+*** Getting a project
+
+ : (gitlab:project "username/project")
 
 
-* More
+ [[https://docs.gitlab.com/ce/api/projects.html#get-single-project][endpoint documentation]].
+
+*** Getting a project's issues
+
+: (project-issues "user/project" :params '(("state" . "opened")))
+
+See the api documentation for the possible parameters.
+
+
+
 
 Inspired by [[https://gitlab.com/tarsius/glab][glab.el]].
 
