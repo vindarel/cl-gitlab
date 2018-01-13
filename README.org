@@ -1,18 +1,18 @@
 
-* Interface to Gitlab's api
+¡ don't look ! it's ugly and doesn't work.
 
-This lib is working but still considered a work in progress.
+* Minimalistic interface to Gitlab's api
 
-: (gitlab--request :GET "/projects")
+A work in progress.
 
-You must login beforehand or manually set the =gitlab--private-token=:
+: (gitlab:request :GET "/projects")
 
-: (gitlab--get-access-token)
+You must login beforehand or manually set the =*private-token*=:
+
+: (gitlab:get-access-token)
 
 Inspired by [[https://gitlab.com/tarsius/glab][glab.el]].
 
 It follows  a minimalistic  approach so you  better read  Gitlab's API
 documentation: https://docs.gitlab.com/ce/api/  The real  advantage is
 that if their API changes, our library doesn't break.
-
-It is not on Quicklisp. Just ask if you need :)
